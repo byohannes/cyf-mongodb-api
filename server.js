@@ -36,11 +36,10 @@ client.connect(function () {
         return response.status(404)
       }
       if (error) {
-        return response.sendStatus(500).send(error)
+        return response.status(500).send(error)
       }
       return response.status(200).send(result)
 
-      client.close()
     })
   })
 
@@ -105,11 +104,11 @@ client.connect(function () {
       }
       return response.status(200).send(result)
 
-      client.close()
+     
     })
   })
-
-  app.listen(3000, () => {
+  const port =process.env.PORT||3000;
+  app.listen(port, () => {
     console.log(`Server running and listening`)
   })
 })
