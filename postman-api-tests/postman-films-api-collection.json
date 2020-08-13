@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "e8be8f8a-f181-4623-a511-3324c4c662e8",
+		"name": "Film api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get all films",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "49446e12-5104-4df1-9fd5-ea6101ca74a8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+							"",
+							"pm.test(\"Body contains list of films\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(15);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/films",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"films"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get one film by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4202986c-55e0-468a-b81c-af6800cf2428",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+							"",
+							"",
+							"pm.test(\"Check movie title\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.title.toLowerCase()).to.eql(\"metropolis\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/films/573a1391f29313caabcd8414",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"films",
+						"573a1391f29313caabcd8414"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get one film by id when missing",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "73e29631-578b-4c43-8982-f732e35c240d",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/films/573a1391f29313caabcd9999",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"films",
+						"573a1391f29313caabcd9999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get one film by id temp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "45d157cd-1920-4c49-bc07-0c7a035aeee3",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/films/5f35245df4d1cde75cccc613",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"films",
+						"5f35245df4d1cde75cccc613"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create film ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "32850794-27d5-4f4c-a123-1cc5f79da3be",
+						"exec": [
+							"pm.test(\"check Status code\", function () { pm.response.to.have.status(201); });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullplot\": \"some one studies postman.\",\n    \"imdb\": {\n        \"rating\": 8.3,\n        \"votes\": 99845,\n        \"id\": 17136\n    },\n    \"year\":2020,\n    \"plot\": \"sonjide and yohannes and neil.\",\n    \"genres\": [\n        \"Drama\",\n        \"Sci-Fi\"\n    ],\n    \"rated\": \"NOT RATED\",\n    \"metacritic\": 98,\n    \"title\": \"postman\",\n    \"lastupdated\": \"2015-09-04 00:09:30.553000000\",\n    \"languages\": [\n        \"German\"\n    ],\n    \"writers\": [\n        \"Thea von Harbou (screenplay)\",\n        \"Thea von Harbou (novel)\"\n    ],\n    \"tomatoes\": {\n        \"website\": \"http://www.kino.com/metropolis\",\n        \"viewer\": {\n            \"rating\": 4.1,\n            \"numReviews\": 60706,\n            \"meter\": 92\n        },\n        \"dvd\": \"2003-02-18T00:00:00.000Z\",\n        \"critic\": {\n            \"rating\": 9.1,\n            \"numReviews\": 115,\n            \"meter\": 99\n        },\n        \"boxOffice\": \"$0.5M\",\n        \"consensus\": \"A visually awe-inspiring science fiction classic from the silent era.\",\n        \"rotten\": 1,\n        \"production\": \"Paramount Pictures\",\n        \"lastUpdated\": \"2015-09-16T17:48:27.000Z\",\n        \"fresh\": 114\n    },\n    \"poster\": \"https://m.media-amazon.com/images/M/MV5BMTg5YWIyMWUtZDY5My00Zjc1LTljOTctYmI0MWRmY2M2NmRkXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SY1000_SX677_AL_.jpg\",\n    \"num_mflix_comments\": 2,\n    \"released\": \"1927-03-13T00:00:00.000Z\",\n    \"awards\": {\n        \"wins\": 3,\n        \"nominations\": 4,\n        \"text\": \"3 wins & 4 nominations.\"\n    },\n    \"countries\": [\n        \"Germany\"\n    ],\n    \"cast\": [\n        \"Alfred Abel\",\n        \"Gustav Frèhlich\",\n        \"Rudolf Klein-Rogge\",\n        \"Fritz Rasp\"\n    ],\n    \"directors\": [\n        \"sonjide\"\n    ],\n    \"runtime\": 60\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/films",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"films"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update film",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5bc15e0d-89e1-4299-aad8-a0a9c45fd8d9",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullplot\": \"some one studies automated testing on postman.\",\n    \"imdb\": {\n        \"rating\": 8.3,\n        \"votes\": 99845,\n        \"id\": 17136\n    },\n    \"year\": 2020,\n    \"plot\": \"sonjide and yohannes and neil.\",\n    \"genres\": [\n        \"Drama\",\n        \"Sci-Fi\"\n    ],\n    \"rated\": \"NOT RATED\",\n    \"metacritic\": 98,\n    \"title\": \"postman\",\n    \"lastupdated\": \"2015-09-04 00:09:30.553000000\",\n    \"languages\": [\n        \"German\"\n    ],\n    \"writers\": [\n        \"Thea von Harbou (screenplay)\",\n        \"Thea von Harbou (novel)\"\n    ],\n    \"tomatoes\": {\n        \"website\": \"http://www.kino.com/metropolis\",\n        \"viewer\": {\n            \"rating\": 4.1,\n            \"numReviews\": 60706,\n            \"meter\": 92\n        },\n        \"dvd\": \"2003-02-18T00:00:00.000Z\",\n        \"critic\": {\n            \"rating\": 9.1,\n            \"numReviews\": 115,\n            \"meter\": 99\n        },\n        \"boxOffice\": \"$0.5M\",\n        \"consensus\": \"A visually awe-inspiring science fiction classic from the silent era.\",\n        \"rotten\": 1,\n        \"production\": \"Paramount Pictures\",\n        \"lastUpdated\": \"2015-09-16T17:48:27.000Z\",\n        \"fresh\": 114\n    },\n    \"poster\": \"https://m.media-amazon.com/images/M/MV5BMTg5YWIyMWUtZDY5My00Zjc1LTljOTctYmI0MWRmY2M2NmRkXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SY1000_SX677_AL_.jpg\",\n    \"num_mflix_comments\": 2,\n    \"released\": \"1927-03-13T00:00:00.000Z\",\n    \"awards\": {\n        \"wins\": 3,\n        \"nominations\": 4,\n        \"text\": \"3 wins & 4 nominations.\"\n    },\n    \"countries\": [\n        \"Germany\"\n    ],\n    \"cast\": [\n        \"Alfred Abel\",\n        \"Gustav Frèhlich\",\n        \"Rudolf Klein-Rogge\",\n        \"Fritz Rasp\"\n    ],\n    \"directors\": [\n        \"sonjide\"\n    ],\n    \"runtime\": 60\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/films/5f35245df4d1cde75cccc613",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"films",
+						"5f35245df4d1cde75cccc613"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete film",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "10d4cefd-a4b8-4cdb-b7ab-e93dc8903420",
+						"exec": [
+							"pm.test(\"check status code\", function () { pm.response.to.have.status(204); });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/films/5f35245df4d1cde75cccc613",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"films",
+						"5f35245df4d1cde75cccc613"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete film when missing",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3fd53236-1349-4dd9-b085-80b32501357d",
+						"exec": [
+							"pm.test(\"check status code\", function () { pm.response.to.have.status(404); });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/films/5f35245df4d1cde75ccc9999",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"films",
+						"5f35245df4d1cde75ccc9999"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "add26df1-bba3-4327-9d16-289a452b1e76",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "89ed5156-c3ab-42b6-b3d1-00870e653808",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
