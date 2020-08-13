@@ -92,7 +92,7 @@ client.connect(function () {
   app.delete('/films/:id', function (request, response) {
     const collection = db.collection('movies')
     const newId = new mongodb.ObjectID(request.params.id)
-    const searchObject = {_id: id}
+    const searchObject = {_id: newId}
     if (!mongodb.ObjectID.isValid(newId)) {
       return response.sendStatus(404)
     }
