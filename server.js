@@ -33,7 +33,7 @@ client.connect(function () {
     }
     collection.findOne(searchObject, function (error, result) {
       if (!result) {
-        return response.status(404)
+        return response.sendStatus(404)
       }
       if (error) {
         return response.status(500).send(error)
@@ -102,7 +102,7 @@ client.connect(function () {
       if (error) {
         return response.sendStatus(500).send(error)
       }
-      return response.status(200).send(result)
+      return response.status(204).send(result)
 
      
     })
